@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>自动打卡注册</title>
+    <link rel="stylesheet" href="https://students.demoo.com.cn/htmlstatic/plug/weuix/css/weui.css"/>
+    <link rel="stylesheet" href="https://students.demoo.com.cn/htmlstatic/plug/weuix/css/weuix.css"/>
+    <link rel="stylesheet" href="https://students.demoo.com.cn/htmlstatic/plug/weuix/css/common.css"/>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/jquery2.1.4/jquery.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/jquery.validate.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/jquery.form.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/zepto.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/zepto.weui.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/php.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/picker.city.js"></script>
+</head>
+<body>
+    <div id="popout"></div>
+    <div id="mask"></div>
+    <div id="navigation"></div>
+    <div id="content">    <div>
+            <img style="width: 100%" src="https://hzdemoo.oss-cn-hangzhou.aliyuncs.com/zjgsu/qjbg.jpg" alt="">
+        </div>
+        <form action="" method="post" enctype="multipart/form-data">
+    
+            <div style="padding-top: 50px">
+                <div class="weui-cells__title"></div>
+                <div class="f-green f20" style="text-align: center">自动打卡注册</div>
+                <div class="weui-cells weui-cells_form" style="margin-top: 30px">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">账号</label></div>
+                        <div class="weui-cell__bd weui-cell_primary"><input id="name" type="text" class="weui-input"
+                                                                            placeholder="Please enter your Name"
+                                                                            required name="name"/>
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">密码</label></div>
+                        <div class="weui-cell__bd weui-cell_primary"><input id="password" name="password" type="password"
+                                                                            class="weui-input"
+                                                                            placeholder="Please enter your password"
+                                                                            required/></div>
+                    </div>
+    
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+                        <div class="weui-cell__bd weui-cell_primary"><input id="captcha" name="captcha" type="text"
+                                                                            class="weui-input" placeholder="请不要填写验证码" required></div>
+                        <div class="weui-cell__ft">
+                            <img class="weui-vcode-img"
+                                 src="https://students.demoo.com.cn/captcha/default?unA9aigj" id="captchasrc"
+                                 onclick="this.src='https://students.demoo.com.cn/captcha/default?tVdozgDS'+Math.random()"
+                                 alt="验证码">
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="weui-btn-area">
+                <button  class="weui-btn weui-btn_primary" id="btn">提交</button>
+            </div>
+            <script>
+                $(function(){
+                    $("#btn").on("click",function(){
+                        jump1();
+                    });
+                });
+        
+                function jump1(){
+                    var name=document.getElementById("name").value;
+                    var passwd=document.getElementById("password").value;
+                    if(window.XMLHttpRequest){
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else{
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","resign.php?passwd="+passwd+"&name="+name,true);
+                    xmlhttp.send();
+                    xmlhttp.onreadystatechange=function()
+                    {
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                        {
+                        // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+                        if(xmlhttp.responseText == 0){
+                            alert("添加成功,每天上午七点准时打卡，第一次使用后请先查看是否成功，打卡中住址一项为浙江工商大学钱江湾生活区，如要取消自主打卡请自行联系开发者");
+                            }
+                        else{
+                            alert("请勿重复添加");
+                            }
+                        }
+                    }
+                    // //url = "./comein.html"
+                    // url = "out.html?name="+encodeURI(name)+"&password="+password;//此处拼接内容
+                    // window.location.href = url;
+                }
+            </script>
+        </form>
+        <div class="weui-footer" style="margin-top: 30px">
+            <p class="weui-footer__text">浙江工商大学学生处<br>
+                Copyright 2018-2020 <br></p>
+        </div>
+    
+</body>
+</html>
