@@ -26,7 +26,6 @@ data = {
     'hzQRCode': 'A',
     'specialDesc': ''
 }
-
 with open('data.json',encoding='utf-8') as f:
     users = json.load(f)
 for user in users:
