@@ -24,7 +24,6 @@ def Connect():
     cursor.execute(sql)
     db.commit()
     db.close()
-
 if "__main__" == __name__:
     while True:
         Connect()
