@@ -1,3 +1,4 @@
 [
-  {"name": "student_id", "psswd": "password", "home": "currentResd"}
+  {"name": "student_id1", "psswd": "password1", "home": "currentResd1"},
+  {"name": "student_id2", "psswd": "password2", "home": "currentResd2"}
 ]
