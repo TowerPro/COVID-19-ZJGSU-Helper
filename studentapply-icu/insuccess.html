@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>出校凭证</title>
+    <link rel="stylesheet" href="https://students.demoo.com.cn/htmlstatic/plug/weuix/css/weui.css"/>
+    <link rel="stylesheet" href="https://students.demoo.com.cn/htmlstatic/plug/weuix/css/weuix.css"/>
+    <link rel="stylesheet" href="https://students.demoo.com.cn/htmlstatic/plug/weuix/css/common.css"/>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/jquery2.1.4/jquery.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/jquery.validate.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/jquery.form.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/zepto.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/zepto.weui.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/php.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/picker.city.js"></script>
+</head>
+<body>
+<div id="popout"></div>
+<div id="mask"></div>
+<div id="navigation"></div>
+<div id="content">    <style>
+        .weui-pay-m::before {
+            content: none;
+        }
+    </style>
+    <script>
+        $(function () {
+
+            $().ready(function () {
+                $(".tab-menu li").click(function () {
+                    //通过 .index()方法获取元素下标，从0开始，赋值给某个变量
+                    var _index = $(this).index();
+                    //让内容框的第 _index 个显示出来，其他的被隐藏
+                    $(".tab-box>div").eq(_index).show().siblings().hide();
+                    //改变选中时候的选项框的样式，移除其他几个选项的样式
+                    $(this).addClass("change").siblings().removeClass("change");
+                });
+            });
+
+
+        })
+
+    </script>
+    <div class="weui-tab" style="height:auto;">
+        <div>
+            <img style="width: 100%" src="https://hzdemoo.oss-cn-hangzhou.aliyuncs.com/zjgsu/1592876109703.png" alt="">
+        </div>
+        <div class="weui-tab__panel">
+            <div class="tab-menu">
+                <ul class="tab-wrap">
+                    <li class="tab-title change" style="border-right: 0;">
+                        <span class="tab-left">临时凭证</span>
+                    </li>
+                    <li class="tab-title">
+                        <span class="tab-right">固定凭证</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-box credentials-wrap">
+                <div class="temp-wrap credentials">
+                                                                        <div class="weui-pay-m">
+                                <div class="weui-pay-order">
+                                    <dl class="weui-pay-line">
+                                        <dd class="weui-pay-name"><h3 id="daytime">2020-07-27--上午(06:30-13:00)</h3></dd>
+                                        <dt class="weui-pay-label">使用人：</dt>
+                                        <dd class="weui-pay-e" id="name"></dd>
+                                    </dl>
+                                    <dl class="weui-pay-line">
+                                        <dt class="weui-pay-label">审核时间：</dt>
+                                        <dd class="weui-pay-e" id="checktime"></dd>
+                                    </dl>
+                                                                            <dl class="weui-pay-line">
+                                            <dt class="weui-pay-label">出校时间：</dt>
+                                            <dd class="weui-pay-e" id="outtime"></dd>
+                                        </dl>
+                                                                                                                <dl class="weui-pay-line">
+                                            <dt class="weui-pay-label">返校时间：</dt>
+                                            <dd class="weui-pay-e" id="intime"></dd>
+                                        </dl>
+                                                                                                                <dl class="weui-pay-line">
+                                            <dd class="weui-pay-e" style="color:orangered">学生已返校</dd>
+                                        </dl>
+                                    
+
+                                </div>
+                            </div>
+                                                            </div>
+                <div class="regular-wrap credentials">
+                                                                                </div>
+            </div>
+        </div>
+        <div class="weui-tabbar tab-bottom">
+            <a href="/wap/plug/slak" class="weui-tabbar__item weui-bar__item_on">
+                <i class="icon icon-25 f27 weui-tabbar__icon"></i>
+                <p class="weui-tabbar__label">凭证</p>
+            </a>
+            <a href="/wap/plug/slak/apply" class="weui-tabbar__item">
+                <i class="icon icon-67 f27 weui-tabbar__icon"></i>
+                <p class="weui-tabbar__label">申请</p>
+            </a>
+            <a href="/wap/plug/slak/applylist" class="weui-tabbar__item">
+                <i class="icon icon-115 f27 weui-tabbar__icon"></i>
+                <p class="weui-tabbar__label">记录</p>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+            var name=decodeURI(window.location.href).split("=")[1];//得到lemon
+            var name = name.split("&")[0];
+            var password = decodeURI(window.location.href).split("=")[2];
+            var password = password.substring(0,10);
+            var name = name+"(计算机与信息工程学院)";
+            $("#name").text(name); 
+            var datetime = new Date();
+            //获取组件
+            var year = datetime.getFullYear();
+            var month = datetime.getMonth() + 1;
+            var day = datetime.getDate();
+            var hour = datetime.getHours();
+            var minute = datetime.getMinutes();
+            var second = datetime.getSeconds();
+            var checkday;
+            var temphour = hour;
+            if (minute < 10) {
+                var minute = 0 + "" + minute;
+            }
+            if (second < 10) {
+                var second = 0 + "" + second;
+            }
+            if(month<10){
+                var month = 0 + "" + month;
+            }
+            if (hour < 10) {
+                var hour = 0 + "" + hour;
+            }
+            var checkmonth = month;
+            if(day > 1){
+                if(day<10){
+                    var checkday = 0 + "" + (day-1);
+                }
+                else{
+                    var checkday = day-1;
+                }
+            }
+            else{
+                var checkday = 30;
+                var checkmonth = month-1;
+            }
+            var checktime = year+"-"+checkmonth+"-"+checkday+" 20:27:33";
+            $("#checktime").text(checktime);
+            if(temphour < 13){
+                var outtime = year+"-"+month+"-"+day+" 10:21:33";
+                var daytime = year+"-"+month+"-"+day+"--上午(06:30-13:00)";
+            }else{
+                var outtime = year+"-"+month+"-"+day+" 13:41:33";
+                var daytime = year+"-"+month+"-"+day+"--下午(13:30-20:00)";     
+            }
+            $("#daytime").text(daytime);
+            $("#outtime").text(outtime);
+            var intime = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
+            $("#intime").text(intime);
+
+        })
+    </script>
+
+</div>
+</body>
+</html>
